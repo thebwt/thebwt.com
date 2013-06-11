@@ -1,0 +1,26 @@
+{%extends"base.html"%}
+{% block content %}
+{% if user.is_anonymous() %}
+<h1>Howdy there!</h1>
+{% else %}
+<h1>Hi, {{user.doc.nickname}}!</h1>
+{% endif %}
+<form action="" method="post" name="post">
+	<p>Say something</p>
+	<p>{{ form.body(size = 30, maxlength = 140) }}</p>
+	{% for error in form.errors.post %}
+        <div class="alert alert-error">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			[{{error}}]
+		</div>
+        {% endfor %}
+
+	    <p><input type="submit" value="Post it!"></p>
+	
+{{form.hidden_tag()}}
+{%for post in posts %}
+<div>
+	<p class="well well-small">{{ col.users.find_one(post.author).nickname }} says:<b>{{post.body}}</b></p>
+</div>
+{% endfor %}
+{% endblock %}
