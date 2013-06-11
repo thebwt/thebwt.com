@@ -42,10 +42,10 @@ def login():
         
 @lm.user_loader
 def load_user(id):
-    u = collection['users'].find_one({'nickname':id})
+    u = collection['users'].find_one({'email':id})
     collection['log'].insert({'id':id, 'user':u})
     if u:
-        return User(u['email'])
+        return User(id)
     else:
         return None
     

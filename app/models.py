@@ -51,7 +51,7 @@ class User(Resource):
         
     def get_id(self):
         if self.doc:
-            return self.doc['nickname']
+            return self.doc['email']
         return None
         
     def GET(self, request, userid):
